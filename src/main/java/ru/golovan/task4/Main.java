@@ -3,9 +3,7 @@ package ru.golovan.task4;
 import java.util.Scanner;
 
 /**
- * Необходимо написать в соответствии с ООП
- * реализацию функционала конвертации градусов Цельсия в Кельвины и Фаренгейты
- * и возможностью расширения реализаций конвертаций градусов Цельсия в другие единицы измерения
+ * Необходимо реализовать фабричный метод для п.1
  */
 public class Main {
     public static final Scanner sc = new Scanner(System.in);
@@ -13,13 +11,15 @@ public class Main {
         System.out.print("Введите градусы Цельсия: ");
         double value = sc.nextDouble();
 
+        ConvertorFactory convertorFactory = new CelsiusConvertorFactory();
+
         // конвертация в Кельвины
-        Convertor celsiusConvertor = new CelsiusConvertorToKelvin();
+        Convertor celsiusConvertor = convertorFactory.createConvertor(Measures.KELVIN);
         double resultK = celsiusConvertor.convert(value);
         System.out.println("Результат конвертации: " + resultK + celsiusConvertor.getResultName());
 
         // конвертация в Фаренгейты
-        celsiusConvertor = new CelsiusConvertorToFahrenheit();
+        celsiusConvertor = convertorFactory.createConvertor(Measures.FAHRENHEIT);
         double resultF = celsiusConvertor.convert(value);
         System.out.println("Результат конвертации: " + resultF + celsiusConvertor.getResultName());
 
